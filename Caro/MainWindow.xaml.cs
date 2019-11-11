@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Caro
 {
@@ -38,7 +39,9 @@ namespace Caro
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTicker;
+
             int btnWidth = 40;
             int btnHeigh = 40;
 
@@ -67,6 +70,7 @@ namespace Caro
             
         }
 
+        
         bool Xturn = true;
 
         private void BtnClick(object sender, RoutedEventArgs e)
@@ -114,6 +118,7 @@ namespace Caro
                     MessageBox.Show("Hòa nhau!");
                 }
 
+                countTime = 10;
                 SetTurn();
             }
 
@@ -261,6 +266,9 @@ namespace Caro
             }
             Xturn = true;
             SetTurn();
+            countTime = 10;
+            time.Text = "10";
+            dt.Stop();
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
@@ -271,7 +279,8 @@ namespace Caro
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var screen = new FileName();
-            
+            dt.Stop();
+            btn_starttimeOut.Content = "Contunute";
             StreamWriter Writer=null;
             if (screen.ShowDialog() == true)
             {
@@ -285,6 +294,9 @@ namespace Caro
 
                     //lưu SumCount
                     Writer.WriteLine($"{SumCount}");
+
+                    //lưu lại thời gian
+                    Writer.WriteLine($"{time.Text.ToString()}");
 
                     //lưu ma trận biểu diễn
                     for (int i = 0; i < Rows; i++)
@@ -326,6 +338,11 @@ namespace Caro
                 //đọc dòng kế tiếp SumCount
                 SumCount = int.Parse(Reader.ReadLine());
 
+                //đọc lên thời gian
+                countTime = int.Parse(Reader.ReadLine());
+                time.Text = countTime.ToString();
+                btn_starttimeOut.Content = "Continute";
+
                 for(int i=0;i<Rows;i++)
                 {
                     var token = Reader.ReadLine().Split(new string[] {" "}, StringSplitOptions.None);
@@ -350,6 +367,43 @@ namespace Caro
                     }                    
                 }
             }
+        }
+
+        DispatcherTimer dt = new DispatcherTimer();
+        int countTime = 10;
+        private void dtTicker(object sender, EventArgs e)
+        {
+            
+            countTime--;
+            if(countTime<5)
+            {
+                time.Foreground = Brushes.Red;
+            }
+            else
+            {
+                time.Foreground = Brushes.Blue;
+            }
+            time.Text = (countTime).ToString();
+            if (countTime==0)
+            {
+                if (Xturn)
+                {
+                    MessageBox.Show("O Won!");
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("X Won!");
+                    Reset();
+                }
+                dt.Stop();
+            }
+        }
+
+        private void TimeOut_Click(object sender, RoutedEventArgs e)
+        {
+            btn_starttimeOut.Content = "Start With Time Out";
+            dt.Start();
         }
     }
 }

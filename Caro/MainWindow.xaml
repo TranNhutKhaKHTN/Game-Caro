@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="527" Width="800" Loaded="Window_Loaded">
     <Canvas x:Name="Canvas">
-        <Label Content="Game Caro" FontSize="50" Width="585" HorizontalContentAlignment="Center"></Label>
-        <TextBlock Height="83" Width="86" Canvas.Left="542" Canvas.Top="67"></TextBlock>
-        <Label Content="Turn: " FontSize="30" Canvas.Left="525" Canvas.Top="171" Width="76"></Label>
-        <Label Name="turn" Content="X" Foreground="Red" FontSize="30" Canvas.Left="613" Canvas.Top="171" Width="37"></Label>
-        <Button Content="Save" Click="Save_Click" Height="26" Width="80" Canvas.Left="542" Canvas.Top="240"></Button>
-        <Button Content="Load" Click="Load_Click" Height="26" Width="80" Canvas.Left="542" Canvas.Top="270"></Button>
-        <Button Content="Reset" Click="Reset_Click" Height="26" Width="80" Canvas.Left="542" Canvas.Top="300"></Button>
+        <Label Content="Game Caro" Foreground="Orange"  FontSize="50" Width="585" HorizontalContentAlignment="Center"></Label>
+        <TextBlock x:Name="time" Height="83" Width="80" Canvas.Left="551" Canvas.Top="147" FontSize="60" Foreground="Blue" Text="10" TextAlignment="Center"></TextBlock>
+        <Label Content="Time out" FontSize="30" Canvas.Left="528" Canvas.Top="97"></Label>
+        <Label Content="Turn: " FontSize="30" Canvas.Left="528" Canvas.Top="264" Width="76"></Label>
+        <Label Name="turn" Content="X" Foreground="Red" FontSize="30" Canvas.Left="625" Canvas.Top="264" Width="46"></Label>
+        <Button Content="Save" Click="Save_Click" Height="26" Width="80" Canvas.Left="552" Canvas.Top="321"></Button>
+        <Button Content="Load" Click="Load_Click" Height="26" Width="80" Canvas.Left="552" Canvas.Top="351"></Button>
+        <Button Content="Reset" Click="Reset_Click" Height="26" Width="80" Canvas.Left="552" Canvas.Top="381"></Button>
+        <Button Name="btn_starttimeOut" Content="Start With Time Out" Click="TimeOut_Click" Height="26" Width="130" Canvas.Left="529" Canvas.Top="233"></Button>
     </Canvas>
 </Window>

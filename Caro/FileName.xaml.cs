@@ -31,5 +31,11 @@ namespace Caro
             this.DialogResult = true;
             this.Close();
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            filename = "";
+            this.Close();
+        }
     }
 }
