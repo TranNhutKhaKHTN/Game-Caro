@@ -58,6 +58,7 @@ namespace Caro
                     Button[i, j].Width = btnWidth;
                     Button[i, j].Background = Brushes.White;
                     Button[i, j].FontSize = 20;
+                    
                     Button[i, j].Tag= new Tuple<int,int>(i, j);
                     Button[i, j].Click += BtnClick;
                     
@@ -105,17 +106,21 @@ namespace Caro
                 if (kt == 1)
                 {
                     MessageBox.Show("X Won!");
+                    dt.Stop();
                     Reset();
                 }
                 if (kt == 2)
                 {
                     MessageBox.Show("O Won!");
+                    dt.Stop();
                     Reset();
                 }
 
                 if(SumCount==Cols*Rows)
                 {
                     MessageBox.Show("Hòa nhau!");
+                    dt.Stop();
+                    Reset();
                 }
 
                 countTime = 10;
@@ -268,6 +273,7 @@ namespace Caro
             SetTurn();
             countTime = 10;
             time.Text = "10";
+            time.Foreground = Brushes.Blue;
             dt.Stop();
         }
 
@@ -334,6 +340,7 @@ namespace Caro
                 //đọc dòng đầu (lượt đi hiện tại)
                 var firstline = Reader.ReadLine();
                 Xturn = firstline == "X";
+                SetTurn();
 
                 //đọc dòng kế tiếp SumCount
                 SumCount = int.Parse(Reader.ReadLine());
