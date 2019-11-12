@@ -273,6 +273,7 @@ namespace Caro
             SetTurn();
             countTime = 10;
             time.Text = "10";
+            SumCount = 0;
             time.Foreground = Brushes.Blue;
             dt.Stop();
         }
@@ -342,7 +343,7 @@ namespace Caro
                 Xturn = firstline == "X";
                 SetTurn();
 
-                //đọc dòng kế tiếp SumCount
+                //đọc dòng kế tiếp SumCount biến kiểm tra hòa
                 SumCount = int.Parse(Reader.ReadLine());
 
                 //đọc lên thời gian
@@ -382,7 +383,7 @@ namespace Caro
         {
             
             countTime--;
-            if(countTime<5)
+            if(countTime<=5)
             {
                 time.Foreground = Brushes.Red;
             }
